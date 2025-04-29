@@ -24,7 +24,6 @@ public:
 
 };
 
-
-void getInput(const std::string &prompt, std::string &target);
+void GetInput(const std::string &prompt, std::string &target);
 
 #endif

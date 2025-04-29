@@ -23,8 +23,16 @@ std::string formatField(const std::string &str)
 
 void PhoneBook::SearchContacts() const
 {
-    std::cout << "|     Index|First Name| Last Name|  Nickname|\n";
-    std::cout << "--------------------------------------------\n";
+
+    std::cout << "\n"
+              << "|" << std::setw(10) << "Index"
+              << "|" << std::setw(10) << "First Name"
+              << "|" << std::setw(10) << "Last Name"
+              << "|" << std::setw(10) << "Nickname"
+              << "|\n";
+
+    std::cout << std::string(45, '-') << "\n";
+
 
     int i = 0;
     while (i < 8)
@@ -32,17 +40,18 @@ void PhoneBook::SearchContacts() const
         if (!contacts[i].IsEmpty())
         {
 
-            std::cout << "|" << std::setw(7) << i
-            << "|" << formatField(contacts[i].getFirstName())
-            << "|" << formatField(contacts[i].getLastName())
-            << "|" << formatField(contacts[i].getNickname())
-            << "|\n";
+            std::cout << "|" << std::setw(10) << i
+                      << "|" << std::setw(10) << formatField(contacts[i].getFirstName())
+                      << "|" << std::setw(10) << formatField(contacts[i].getLastName())
+                      << "|" << std::setw(10) << formatField(contacts[i].getNickname())
+                      << "|\n";
         }
         i++;
     }
 
+
     std::string input_index;
-    getInput("Enter Index Of Contact To Display: ", input_index);
+    GetInput("Enter Index Of Contact To Display: ", input_index);
 
     if (input_index.length() != 1 || !isdigit(input_index[0]))
     {

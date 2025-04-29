@@ -28,4 +28,6 @@ int main()
         else if (command == "EXIT")
             break;
     }
+    
+    return (0);
 }
