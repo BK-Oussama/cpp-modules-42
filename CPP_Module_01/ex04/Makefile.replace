@@ -1,0 +1,19 @@
+
+
+
+CC = c++
+CFLAGS = -Wall -Wextra -Werror -std=c++98
+
+kolas = *.cpp 
+HDRs = *.hpp
+NAME = ExecuteMe
+
+all: $(NAME)
+
+$(NAME): $(kolas) $(HDRs) 
+	$(CC) $(CFLAGS) $(kolas) -o $(NAME)
+	
+clean:
+	rm -f $(NAME)
+
+re: clean all
