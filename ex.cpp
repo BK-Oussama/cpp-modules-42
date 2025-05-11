@@ -1,27 +1,48 @@
 #include <iostream>
-#include <string>
 
-// int #include <iostream>
+class Fraction
+{
+private:
+    int m_numerator{ 0 };
+    int m_denominator{ 1 };
+
+public:
+    // Default constructor
+    Fraction(int numerator = 0, int denominator = 1)
+        : m_numerator{ numerator }, m_denominator{ denominator }
+    {
+    }
+
+    // Copy constructor
+    Fraction(const Fraction& fraction)
+        : m_numerator{ fraction.m_numerator }
+        , m_denominator{ fraction.m_denominator }
+    {
+        std::cout << "Copy constructor called\n";
+    }
+
+    void print() const
+    {
+        std::cout << "Fraction(" << m_numerator << ", " << m_denominator << ")\n";
+    }
+};
+
+void printFraction(Fraction f) // f is pass by value
+{
+    f.print();
+}
+
+Fraction generateFraction(int n, int d)
+{
+    Fraction f{ n, d };
+    return f;
+}
 
 int main()
 {
-    // int x { 5 };
-    // int y { 6 };
+    Fraction f2 { generateFraction(1, 2) }; // Fraction is returned using copy constructor
 
-    // int& ref { x }; // ref is now an alias for x
-
-    // ref = y; // assigns 6 (the value of y) to x (the object being referenced by ref)
-    // // The above line does NOT change ref into a reference to variable y!
-
-    // std::cout << x << '\n'; // user is expecting this to print 5
-
-    int x = -5;
-    if (true)
-    {
-        x = 4;
-        std::cout << x << '\n';
-    }
-    std::cout << x << '\n';
+    printFraction(f2); // f2 is copied into the function parameter using copy constructor
 
     return 0;
 }

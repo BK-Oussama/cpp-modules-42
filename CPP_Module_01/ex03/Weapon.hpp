@@ -3,14 +3,15 @@
 #define WEAPON_HPP
 #include <iostream>
 
-class Weapon{
-    
-    private:
+class Weapon
+{
+
+private:
     std::string m_type;
 
-    public:
+public:
     Weapon(const std::string &type);
-    const std::string &getType()const;
+    const std::string &getType() const;
     void setType(const std::string &type);
 };
 

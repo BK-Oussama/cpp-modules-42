@@ -10,7 +10,7 @@ Zombie *zombieHorde( int N, std::string name )
     int i = 0;
     while (i < N)
     {
-        DozenZombies[i].Set_Zombie_Name(name);
+        DozenZombies[i].set_Zombie_Name(name);
         i++;
     }
 

@@ -1,35 +1,35 @@
 
 #include "Zombie.hpp"
 
+
+Zombie::Zombie(std::string name) : m_name(name){}
+
 void Zombie::announce(void)
 {
     std::cout << m_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
-void Zombie::Set_Zombie_Name(std::string name)
+void Zombie::announceDeath(void)
 {
-    m_name = name;
+    std::cout << m_name << ": is dead ..." << std::endl;
+
 }
 
-Zombie *new_Zombie(std::string name)
+Zombie *newZombie(std::string name)
 {
     Zombie *new_zombie;
 
-    new_zombie = new Zombie();
-    new_zombie->Set_Zombie_Name(name);
+    new_zombie = new Zombie(name);
     return (new_zombie);
 }
 
-
 void randomChump( std::string name)
 {
-    Zombie Champ;
-
-    Champ.Set_Zombie_Name(name);
+    Zombie Champ(name);
     Champ.announce();
 }
 
 Zombie::~Zombie()
 {
-    announce();
+    announceDeath();
 }

@@ -3,13 +3,13 @@
 
 
 // Constructor
-FileReplacer::FileReplacer(const std::string &filename, const std::string &search, const std::string &replace)
+fileReplacer::fileReplacer(const std::string &filename, const std::string &search, const std::string &replace)
     : m_fileName(filename), m_search(search), m_replace(replace) {}
 
 // Function to replace occurrences of searchString with replaceString in the file
-bool FileReplacer::replaceInFile() const
+bool fileReplacer::replaceInFile() const
 {
-    std::ifstream inputFile(m_fileName);
+    std::ifstream inputFile((m_fileName.c_str()));
     if (!inputFile.is_open())
     {
         std::cerr << "Error: Could not open input file: " << m_fileName << std::endl;
@@ -17,31 +17,37 @@ bool FileReplacer::replaceInFile() const
     }
 
     std::string outputFileName = m_fileName + ".replace";
-    std::ofstream outputFile(outputFileName);
+    std::ofstream outputFile(outputFileName.c_str());
     if (!outputFile.is_open())
     {
         std::cerr << "Error: Could not create output file: " << outputFileName << std::endl;
         return false;
     }
 
+
     std::string line;
     while (std::getline(inputFile, line))
     {
         std::string newLine;
-        size_t i = 0;
-        while (i < line.length())
+        size_t pos = 0;
+        size_t found;
+
+        while ((found = line.find(m_search, pos)) != std::string::npos)
         {
-            if (line.substr(i, m_search.length()) == m_search)
-            {
-                newLine = newLine + m_replace;   // Append the replacement string
-                i = i + m_search.length(); // Skip the length of the search string
-            }
-            else
-            {
-                newLine = newLine + line[i]; // Append the current character
-                i++;
-            }
+            // Append part before found string
+            newLine = newLine + line.substr(pos, found - pos);
+
+            // Append replacement string
+            newLine = newLine + m_replace;
+
+            // Move past the found string
+            pos = found + m_search.length();
         }
+
+        // Append the remaining part of the line after the last match
+        newLine = newLine + line.substr(pos);
+
+        // Write the result line to the output file
         outputFile << newLine << '\n';
     }
 

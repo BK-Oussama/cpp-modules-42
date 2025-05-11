@@ -6,7 +6,7 @@
 #include <fstream>
 #include <iostream>
 
-class FileReplacer
+class fileReplacer
 {
 private:
     std::string m_fileName;
@@ -14,7 +14,7 @@ private:
     std::string m_replace;
 
 public:
-    FileReplacer(const std::string &inputFile, const std::string &search, const std::string &replace);
+    fileReplacer(const std::string &inputFile, const std::string &search, const std::string &replace);
     bool replaceInFile() const;
 };
 
