@@ -1,22 +1,19 @@
 
-NAME = a.out
 
-CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CC = c++
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = *.cpp
+SRCs = *.cpp 
+HDRs = *.hpp
+
+NAME = execute
 
 all: $(NAME)
 
-$(NAME): $(SRC)
-	$(CXX) $(CXXFLAGS) $(SRC) -o $(NAME)
-
+$(NAME): $(SRCs) $(HDRs)
+	$(CC) $(CFLAGS) $(SRCs) -o $(NAME)
+	
 clean:
-	rm -f $(OBJ)
-
-fclean: clean
 	rm -f $(NAME)
 
-re: fclean all
-
-.PHONY: all clean fclean re
+re: clean all

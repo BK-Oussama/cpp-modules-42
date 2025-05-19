@@ -1,51 +1,62 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   FragTrap.cpp                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lai-elho <lai-elho@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 22:34:47 by lai-elho          #+#    #+#             */
-/*   Updated: 2025/05/08 22:34:48 by lai-elho         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap(std::string name) : ClapTrap(name) {
-    _hitPoints = 100;
-    _energyPoints = 100;
-    _attackDamage = 30;
-    std::cout << "FragTrap " << _name << " constructed.\n";
+FragTrap::FragTrap() : ClapTrap()
+{
+    m_hitPoints = 100;
+    m_energyPoints = 100;
+    m_attackDamage = 30;
+    std::cout << "FragTrap default constructor called.\n";
 }
 
-FragTrap::~FragTrap() {
-    std::cout << "FragTrap " << _name << " destroyed.\n";
+FragTrap::FragTrap(std::string name) : ClapTrap(name)
+{
+    m_hitPoints = 100;
+    m_energyPoints = 100;
+    m_attackDamage = 30;
+    std::cout << "FragTrap " << m_name << " constructed.\n";
 }
 
-FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other) {
+FragTrap::~FragTrap()
+{
+    std::cout << "FragTrap " << m_name << " destroyed.\n";
+}
+
+FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other)
+{
     *this = other;
-    std::cout << "FragTrap " << _name << " copied.\n";
+    std::cout << "FragTrap " << m_name << " copied.\n";
 }
 
-FragTrap& FragTrap::operator=(const FragTrap& other) {
-    if (this != &other) {
+FragTrap &FragTrap::operator=(const FragTrap &other)
+{
+    if (this != &other)
+    {
         ClapTrap::operator=(other);
     }
-    std::cout << "FragTrap assignment called for " << _name << ".\n";
+    std::cout << "FragTrap assignment called for " << m_name << ".\n";
     return *this;
 }
 
-void FragTrap::attack(const std::string& target) {
-    if (_energyPoints > 0 && _hitPoints > 0) {
-        _energyPoints--;
-        std::cout << "FragTrap " << _name << " blasts " << target
-                  << ", causing " << _attackDamage << " damage!\n";
-    } else {
-        std::cout << "FragTrap " << _name << " can't attack (no HP or energy).\n";
+void FragTrap::attack(const std::string &target)
+{
+    if (m_energyPoints <= 0 || m_hitPoints <= 0)
+    {
+        std::cout << "FragTrap " << m_name << " can't attack: ";
+        if (m_hitPoints <= 0)
+            std::cout << "no hit points left.\n";
+        else
+            std::cout << "no energy points left.\n";
+        return;
     }
+
+    --m_energyPoints;
+    std::cout << "FragTrap " << m_name << " blasts " << target
+              << ", causing " << m_attackDamage << " points of damage!\n";
 }
 
-void FragTrap::highFivesGuys(void) {
-    std::cout << "FragTrap " << _name << " requests a positive high five from everyone!\n";
+
+void FragTrap::highFivesGuys(void)
+{
+    std::cout << "FragTrap " << m_name << " High fives all around !\n";
 }
