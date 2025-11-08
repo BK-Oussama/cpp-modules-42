@@ -35,7 +35,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 
 Bureaucrat::~Bureaucrat()
 {
-    std::cout << "Bureaucrat Destructor called: " << m_name << std::endl;
+    std::cout << "Destructor called" << std::endl;
 }
 
 const char *Bureaucrat::GradeTooHighException::what() const throw()
