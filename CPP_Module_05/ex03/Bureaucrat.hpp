@@ -5,8 +5,8 @@
 #include <stdexcept>
 #include <string>
 
-#include "Form.hpp"
-class Form;
+#include "AForm.hpp"
+class AForm;
 
 class Bureaucrat
 {
@@ -40,7 +40,10 @@ public:
     void increment_grade();
     void decrement_grade();
 
-    void signForm(Form& form) const;
+    void signForm(AForm& form) const;
+
+    void executeForm(AForm const & form) const;
+
 
 };
 

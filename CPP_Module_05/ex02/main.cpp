@@ -51,7 +51,7 @@ int main()
 
         std::cout << "----------------------------------------\n\n";
 
-        // 3. TEST POLYMORPHIC SUCCESS (Using the single executor: cidna)
+        // TEST POLYMORPHIC SUCCESS (Using the single executor: cidna)
         std::cout << "------- TEST POLYMORPHIC -------\n";
 
         cidna.signForm(*robotomy);

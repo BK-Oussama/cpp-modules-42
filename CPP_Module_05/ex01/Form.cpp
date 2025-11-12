@@ -79,20 +79,16 @@ int Form::getExecuteGrade() const
 
 
 
-void Form::beSigned(const Bureaucrat& signer)
+void Form::beSigned(const Bureaucrat &signer)
 {
     if (m_is_signed)
     {
-        // If already signed, no action is taken.
         std::cout << m_name << " is already signed." << std::endl;
         return ;
     }
 
-    // A lower number is a higher grade. If the signer's grade is numerically higher 
-    // than the required sign grade, they are not qualified.
     if (signer.getGrade() > m_grade_to_sign)
     {
-        // Throw an exception to inform the caller (Bureaucrat::signForm) of the failure.
         throw Form::GradeTooLowException();
     }
     m_is_signed = true;

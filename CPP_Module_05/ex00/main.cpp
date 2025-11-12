@@ -26,7 +26,4 @@ int main()
     {
         std::cout << e.what() << std::endl;
     }
-
-    // std::cout << false << "now we print --" << true << std::endl;
-
 }

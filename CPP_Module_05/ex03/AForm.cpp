@@ -13,11 +13,11 @@ AForm::AForm(const std::string &name, int signGrade, int execGrade)
 };
 
 AForm::AForm(const AForm &copy) : m_name(copy.m_name), m_is_signed(copy.m_is_signed),
-                                  m_grade_to_sign(copy.m_grade_to_sign), m_grade_to_execute(copy.m_grade_to_execute) {};
+    m_grade_to_sign(copy.m_grade_to_sign), m_grade_to_execute(copy.m_grade_to_execute) {};
 
 AForm &AForm::operator=(const AForm &other)
 {
-    // Note: The constant members (_name, _grade_to_sign, _grade_to_execute)
+    // Note: The constant members (m_name, m_grade_to_sign, m_grade_to_execute)
     // CANNOT be reassigned.
 
     if (this != &other)
@@ -107,10 +107,8 @@ std::ostream &operator<<(std::ostream &os, const AForm &f)
     else
         status = "not signed";
 
-
         
-    os << "Form: " << f.getName()
-       << ", Status: " << status
+    os << "Form: " << f.getName() << ", Status: " << status
        << ", Sign Grade: " << f.getSignGrade()
        << ", Execute Grade: " << f.getExecuteGrade();
     return os;

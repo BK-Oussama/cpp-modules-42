@@ -4,8 +4,8 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCs = Bureaucrat.cpp  Form.cpp main.cpp
-HDRs = Bureaucrat.hpp Form.hpp
+SRCs = ScalarConverter.cpp main.cpp
+HDRs = ScalarConverter.hpp
 NAME = executeMe
 
 all: $(NAME)

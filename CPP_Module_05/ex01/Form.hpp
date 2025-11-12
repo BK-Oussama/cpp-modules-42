@@ -31,7 +31,7 @@ public:
     public:
         virtual const char *what() const throw();
     };
-    class GradeTooLowException : public std::exception // this exception i think not necesry
+    class GradeTooLowException : public std::exception
     {
     public:
         virtual const char *what() const throw();
@@ -52,3 +52,5 @@ public:
 std::ostream &operator<<(std::ostream &os, const Form &f);
 
 #endif
+
+
