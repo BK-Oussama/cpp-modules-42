@@ -7,7 +7,7 @@
 struct Data
 {
     int id;
-    std::string content;
+    char content;
     float value;
 };
 

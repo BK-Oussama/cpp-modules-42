@@ -5,7 +5,7 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCs = Serializer.cpp main.cpp
-HDRs = Serializer.hpp
+HDRs = Serializer.hpp Data.hpp
 NAME = executeMe
 
 all: $(NAME)
