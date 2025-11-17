@@ -34,6 +34,7 @@ Array<T>::~Array()
         delete[] m_array;
         m_array = NULL;
     }
+    std::cout << "Array destructor called\n";
 }
 
 template <typename T>

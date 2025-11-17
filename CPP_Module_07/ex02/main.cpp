@@ -1,10 +1,9 @@
 #include <iostream>
-// #include <Array.hpp>
 #include "Array.hpp"
-
 #include <stdlib.h>
 
 #define MAX_VAL 750
+
 int main(int, char **)
 {
     Array<int> numbers(MAX_VAL);
@@ -36,7 +35,7 @@ int main(int, char **)
     }
     catch (const std::exception &e)
     {
-        std::cerr << "--------**** "<< e.what() << '\n';
+        std::cerr << "--------" << e.what() << '\n';
     }
     try
     {

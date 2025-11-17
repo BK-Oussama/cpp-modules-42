@@ -1,0 +1,23 @@
+
+#ifndef ITER_HPP
+#define ITER_HPP
+
+#include <cstddef>
+
+
+template <typename T, typename F>
+
+void iter (T *array, const size_t length, F func)
+{
+    if (!array)
+        return;
+    
+    size_t i = 0;
+    while (i < length)
+    {
+        func(array[i]);
+        i++;
+    }
+}
+
+#endif 
