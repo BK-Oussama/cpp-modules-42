@@ -4,9 +4,9 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCs = main.cpp
-HDRs = .hpp
-NAME = executeMe
+SRCs = BitcoinExchange.cpp main.cpp
+HDRs = BitcoinExchange.hpp
+NAME = btc
 
 all: $(NAME)
 
