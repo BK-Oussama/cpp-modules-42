@@ -4,8 +4,8 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCs = main.cpp
-HDRs = .tpp .hpp
+SRCs = Span.cpp main.cpp
+HDRs = Span.hpp
 NAME = executeMe
 
 all: $(NAME)

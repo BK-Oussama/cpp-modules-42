@@ -4,9 +4,9 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCs = main.cpp
-HDRs = .hpp
-NAME = executeMe
+SRCs = PmergeMe.cpp main.cpp
+HDRs = PmergeMe.hpp
+NAME = PmergeMe
 
 all: $(NAME)
 

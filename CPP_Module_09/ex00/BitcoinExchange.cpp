@@ -12,7 +12,9 @@ BitcoinExchange::BitcoinExchange()
     }
 
     std::string line;
-    std::getline(file, line); // skip header
+    if (!std::getline(file, line)) // skip header && check empty file
+        throw std::runtime_error("Error: data.csv is empty");
+
     while (std::getline(file, line))
     {
         std::string p, Date;
@@ -56,8 +58,9 @@ bool BitcoinExchange::validateDate(std::string &date)
     std::getline(string_stream, month, '-');
     std::getline(string_stream, day, '-');
 
-    if (!year[0] || !month[0] || !day[0])
-        return false;
+    std::string errorMsg = "Error: bad input => " + date;
+    if (year.empty() || month.empty() || day.empty())
+        throw std::invalid_argument(errorMsg);
 
     std::stringstream ssy(year);
     std::stringstream ssm(month);
@@ -67,14 +70,14 @@ bool BitcoinExchange::validateDate(std::string &date)
     ssm >> M;
     ssd >> D;
 
-    if (Y < 2006 || Y > 2030) // may change later: we should only check gains curent day you can buy in future !!
-        return false;
+    if (Y < 2009 || Y > 2030) // may change later: we should only check gains curent day you can buy in future !!
+        throw std::invalid_argument(errorMsg);
 
     if (M <= 0 || M > 12)
-        return false;
+        throw std::invalid_argument(errorMsg);
 
     if (D <= 0 || D > 31)
-        return false;
+        throw std::invalid_argument(errorMsg);
 
     return true;
 }
@@ -83,17 +86,18 @@ bool BitcoinExchange::validateAmount(std::string &amount)
 {
     if (amount.empty() || amount.find_first_not_of(" \t\n\r\f\v") == std::string::npos)
         throw std::invalid_argument("Error: not a positive number.");
-        
 
     float Amount;
 
     std::istringstream ssa(amount);
-    ssa >> Amount;
+
+    if (!(ssa >> Amount))
+        throw std::invalid_argument("Error: not a positive number.");
 
     if (Amount < 0)
         throw std::invalid_argument("Error: not a positive number.");
 
-    if (Amount >= static_cast<float>(__INT_MAX__))
+    if (Amount > 1000)
         throw std::invalid_argument("Error: too large a number.");
 
     return true;
@@ -111,32 +115,45 @@ void BitcoinExchange::processInputFile(const char *filename)
     std::getline(file, line); // skip header
     while (std::getline(file, line))
     {
-        // extract DATE and VALUE '|'
 
         std::string Date, Amount;
         std::istringstream string_stream(line);
 
         std::getline(string_stream, Date, '|');
         std::getline(string_stream, Amount, '|');
-        if (validateDate(Date) == false)
-        {
-            std::cerr << "Error: bad input => " << Date << '\n';
-        }
 
         try
         {
+            if (!Date.empty())
+            {
+                size_t last = Date.find_last_not_of(" \t\n\r");
+                if (last != std::string::npos)
+                    Date = Date.substr(0, last + 1);
+            }
+
+            
+            validateDate(Date);
             validateAmount(Amount);
+
+            // Returns an iterator to the first element that is ≥ key.
+            std::map<std::string, float>::iterator it = m_db.lower_bound(Date);
+
+            if (it->first != Date && it != m_db.begin())
+            {
+                std::cout << "---------------\n";
+                it--;
+            }
+
+            std::istringstream ssa(Amount);
+            float roi;
+            ssa >> roi;
+            roi = roi * it->second;
+
+            std::cout << Date << " =>" << Amount << " = " << roi << std::endl;
         }
-        catch(const std::exception& e)
+        catch (const std::exception &e)
         {
-            std::cerr << e.what() << Amount <<  '\n';
+            std::cerr << e.what() << '\n';
         }
-
-        std::cout << Date << "\t<---->\t" << Amount << std::endl; 
-
-
-        // if not error search for the nearset DATE (key) and give the estimate return en invetsment.
-            // lower_bound
-        // process next line
     }
 }

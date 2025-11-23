@@ -1,5 +1,3 @@
-
-
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
@@ -24,10 +22,9 @@ public:
 
     void processInputFile(const char *file);
 
-        bool validateDate(std::string &date);
-        bool validateAmount(std::string &amount);
-    
-    
+    bool validateDate(std::string &date);
+    bool validateAmount(std::string &amount);
+
     class CouldNotOpenFile : public std::exception
     {
     public:
@@ -39,8 +36,5 @@ public:
 
     const std::map<std::string, float> &getDB() const { return m_db; }; // to be removed later
 };
-
-
-
 
 #endif

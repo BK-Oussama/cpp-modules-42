@@ -5,7 +5,7 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCs = main.cpp
-HDRs = .tpp .hpp
+HDRs = MutantStack.tpp MutantStack.hpp
 NAME = executeMe
 
 all: $(NAME)

@@ -4,9 +4,9 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCs = main.cpp
-HDRs = .hpp
-NAME = executeMe
+SRCs = RPN.cpp main.cpp
+HDRs = RPN.hpp
+NAME = RPN
 
 all: $(NAME)
 

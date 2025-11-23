@@ -24,6 +24,8 @@ public:
 
     int shortestSpan() const;
     int longestSpan() const;
+
+    int get_vec_size();
 };
 
 #endif
