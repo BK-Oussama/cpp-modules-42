@@ -14,12 +14,17 @@ PmergeMe::PmergeMe(int argc, char **argv)
             throw std::invalid_argument("Error: invalid character found");
 
         std::stringstream ss(arg);
-        int num;
+        std::string token;
+        long num;
 
-        while (ss >> num)
+        while (ss >> token)
         {
+            char *end;
+            num = std::strtol(token.c_str(), &end, 10);
             if (num < 0)
                 throw std::invalid_argument("Error: numbers must be positive");
+            if (num > __INT_MAX__)
+                throw std::invalid_argument("Error: too large number");
 
             m_vector.push_back(num);
             m_deque.push_back(num);
@@ -60,6 +65,15 @@ void PmergeMe::displayData() const
     for (std::vector<int>::const_iterator it = m_vector.begin(); it != m_vector.end(); ++it)
     {
         std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+}
+
+void PmergeMe::displayData(std::vector<int> vec) const
+{
+    for (std::vector<int>::const_iterator it = vec.begin(); it != vec.end(); ++it)
+    {
+        std::cout << *it << "-";
     }
     std::cout << std::endl;
 }
@@ -130,7 +144,9 @@ void PmergeMe::sortVector(std::vector<int> &sequence)
     }
 
     sortVector(winners);
+    // displayData(winners);
 
+    // Unwinding happens here
     std::vector<int> mainChain = winners;
     std::vector<int> pendChain;
     i = 0;
@@ -159,10 +175,11 @@ void PmergeMe::sortVector(std::vector<int> &sequence)
 
     while (pendIndex < pendChain.size())
     {
+
         size_t nextCount = getJacobsthalSeq(jackobSequence) - getJacobsthalSeq(jackobSequence - 1);
+
         if (nextCount > pendChain.size() - pendIndex)
             nextCount = pendChain.size() - pendIndex;
-
         size_t i = pendIndex + nextCount;
         while (i > pendIndex)
         {

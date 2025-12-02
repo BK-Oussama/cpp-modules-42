@@ -22,8 +22,12 @@ bool ValidOperator(std::string &token)
 
 bool ValidNumber(std::string &token)
 {
-    if (token.length() == 1 && token[0] >= '0' && token[0] <= '9')
-        return true;
+    if (token.size() == 1)
+        return std::isdigit(token[0]);
+
+    if (token.size() == 2 && (token[0] == '+' || token[0] == '-'))
+        return std::isdigit(token[1]);
+
     return false;
 }
 
